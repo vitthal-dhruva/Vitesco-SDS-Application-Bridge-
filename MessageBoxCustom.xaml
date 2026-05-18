@@ -1,0 +1,331 @@
+﻿<Window x:Class="Hiemdall_bridge.MessageBoxCustom"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Hiemdall_bridge"
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None" 
+        mc:Ignorable="d"
+        Title="MessageBoxWindow" 
+        Height="300" 
+        Width="520" 
+        ResizeMode="NoResize" 
+        Background="{x:Null}" 
+        AllowsTransparency="True">
+
+    <Border CornerRadius="16" Background="White" BorderThickness="0">
+        <!-- Drop Shadow Effect -->
+        <Border.Effect>
+            <DropShadowEffect Color="#2196F3" Direction="270" ShadowDepth="0" Opacity="0.25" BlurRadius="25"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Modern Gradient Header -->
+            <Border Grid.Row="0" 
+                    CornerRadius="16,16,0,0" 
+                    Height="80">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#2196F3" Offset="0"/>
+                        <GradientStop Color="#1976D2" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <Grid Margin="25,0,10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Title Centered in the remaining space -->
+                    <TextBlock x:Name="txtTitle" 
+                               Grid.Column="0"
+                               Text="Message Title"
+                               FontSize="22" 
+                               FontWeight="Bold"
+                               Foreground="White"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Opacity="0.98"
+                               Margin="32,0,0,0"/>
+                    <!-- Offset to keep text centered relative to window -->
+
+                    <!-- Close icon (top-right) - Styled exactly like Eye Button -->
+                    <Button x:Name="btnHeaderClose"
+        Grid.Column="1"
+        Click="btnHeaderClose_Click"
+        Width="36"
+        Height="36"
+        VerticalAlignment="Center"
+        HorizontalAlignment="Right"
+        Margin="0,0,8,0"
+        Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="btnBorder" 
+                    Background="Transparent" 
+                    CornerRadius="18" 
+                    SnapsToDevicePixels="True">
+                                    <materialDesign:PackIcon Kind="Close"
+                                         Width="22"
+                                         Height="22"
+                                         Foreground="White"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <!-- Mouse Hover: Red Background -->
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="btnBorder" Property="Background" Value="#EF5350"/>
+                                    </Trigger>
+                                    <!-- Click/Pressed: Darker Red Background -->
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter TargetName="btnBorder" Property="Background" Value="#D32F2F"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- Content Section with Icon -->
+            <Grid Grid.Row="1" Margin="30,25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <materialDesign:TransitioningContent Grid.Column="0" VerticalAlignment="Center">
+                    <materialDesign:TransitioningContent.OpeningEffects>
+                        <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:0.5"/>
+                        <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.4"/>
+                    </materialDesign:TransitioningContent.OpeningEffects>
+
+                    <Grid Width="70" Height="70" Margin="0,0,20,0">
+                        <Ellipse Width="70" Height="70" Opacity="0.15">
+                            <Ellipse.Fill>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="#2196F3" Offset="0"/>
+                                    <GradientStop Color="Transparent" Offset="1"/>
+                                </RadialGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                        <Border Background="#E3F2FD" 
+                                CornerRadius="35" 
+                                Width="65" 
+                                Height="65"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                            <materialDesign:PackIcon x:Name="MyPackIcon" 
+                                                     Kind="QuestionMarkRhombusOutline"  
+                                                     Foreground="#2196F3"
+                                                     Width="38" 
+                                                     Height="38"
+                                                     HorizontalAlignment="Center"
+                                                     VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                </materialDesign:TransitioningContent>
+
+                <materialDesign:TransitioningContent Grid.Column="1" VerticalAlignment="Center">
+                    <materialDesign:TransitioningContent.OpeningEffects>
+                        <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.6"/>
+                        <materialDesign:TransitionEffect Kind="SlideInFromRight" Duration="0:0:0.5"/>
+                    </materialDesign:TransitioningContent.OpeningEffects>
+
+                    <TextBlock x:Name="txtMessage" 
+                               Text="This is your message content that will be displayed here."
+                               FontSize="15"
+                               Foreground="#37474F"
+                               TextWrapping="Wrap"
+                               LineHeight="24"
+                               FontWeight="Normal"
+                               VerticalAlignment="Center"/>
+                </materialDesign:TransitioningContent>
+            </Grid>
+
+            <!-- Action Buttons -->
+            <Border Grid.Row="2" 
+                    Background="#FAFAFA" 
+                    CornerRadius="0,0,16,16" 
+                    Padding="25,18"
+                    BorderBrush="#EEEEEE"
+                    BorderThickness="0,1,0,0">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <!-- OK Button - Primary Action (green) -->
+    <Button x:Name="btnOk"
+            Click="btnOk_Click"
+            Grid.Column="1"
+            Margin="5,0"
+            Width="120"
+            Height="42"
+            Content="OK"
+            Foreground="White"
+            FontSize="14"
+            FontWeight="SemiBold"
+            Cursor="Hand"
+            BorderThickness="0">
+      <Button.Template>
+        <ControlTemplate TargetType="Button">
+          <Border x:Name="border" CornerRadius="8" BorderThickness="0">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="#4CAF50" Offset="0"/>
+                <GradientStop Color="#43A047" Offset="1"/>
+              </LinearGradientBrush>
+            </Border.Background>
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="border" Property="Background">
+                <Setter.Value>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#43A047" Offset="0"/>
+                    <GradientStop Color="#388E3C" Offset="1"/>
+                  </LinearGradientBrush>
+                </Setter.Value>
+              </Setter>
+              <Setter TargetName="border" Property="Effect">
+                <Setter.Value>
+                  <DropShadowEffect Color="#4CAF50" ShadowDepth="0" Opacity="0.3" BlurRadius="10"/>
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+              <Setter TargetName="border" Property="Background" Value="#2E7D32"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Button.Template>
+    </Button>
+
+    <!-- Cancel Button - Red variant -->
+    <Button x:Name="btnCancel"
+            Click="btnCancel_Click"
+            Grid.Column="2"
+            Margin="5,0"
+            Width="120"
+            Height="42"
+            Content="CANCEL"
+            Foreground="White"
+            FontSize="14"
+            FontWeight="SemiBold"
+            Cursor="Hand"
+            BorderThickness="0">
+      <Button.Template>
+        <ControlTemplate TargetType="Button">
+          <Border x:Name="border" CornerRadius="8" BorderThickness="0">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="#E53935" Offset="0"/>
+                <GradientStop Color="#D32F2F" Offset="1"/>
+              </LinearGradientBrush>
+            </Border.Background>
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="border" Property="Background">
+                <Setter.Value>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#D32F2F" Offset="0"/>
+                    <GradientStop Color="#C62828" Offset="1"/>
+                  </LinearGradientBrush>
+                </Setter.Value>
+              </Setter>
+              <Setter TargetName="border" Property="Effect">
+                <Setter.Value>
+                  <DropShadowEffect Color="#E53935" ShadowDepth="0" Opacity="0.25" BlurRadius="10"/>
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+              <Setter TargetName="border" Property="Background" Value="#B71C1C"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Button.Template>
+    </Button>
+
+    <!-- YES button (used for Yes/No dialogs) -->
+    <Button x:Name="btnYes"
+            Click="btnYes_Click"
+            Grid.Column="1"
+            Margin="5,0"
+            Width="120"
+            Height="42"
+            Content="YES"
+            Foreground="White"
+            FontSize="14"
+            FontWeight="SemiBold"
+            Cursor="Hand"
+            BorderThickness="0"
+            Visibility="Collapsed">
+      <!-- reuse green template or keep same appearance as btnOk -->
+      <Button.Template>
+        <ControlTemplate TargetType="Button">
+          <Border x:Name="border" CornerRadius="8" BorderThickness="0">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="#4CAF50" Offset="0"/>
+                <GradientStop Color="#43A047" Offset="1"/>
+              </LinearGradientBrush>
+            </Border.Background>
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          </Border>
+        </ControlTemplate>
+      </Button.Template>
+    </Button>
+
+    <!-- NO button (used for Yes/No dialogs) -->
+    <Button x:Name="btnNo"
+            Click="btnNo_Click"
+            Grid.Column="2"
+            Margin="5,0"
+            Width="120"
+            Height="42"
+            Content="NO"
+            Foreground="White"
+            FontSize="14"
+            FontWeight="SemiBold"
+            Cursor="Hand"
+            BorderThickness="0"
+            Visibility="Collapsed">
+      <!-- reuse red template or keep same appearance as btnCancel -->
+      <Button.Template>
+        <ControlTemplate TargetType="Button">
+          <Border x:Name="border" CornerRadius="8" BorderThickness="0">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="#E53935" Offset="0"/>
+                <GradientStop Color="#D32F2F" Offset="1"/>
+              </LinearGradientBrush>
+            </Border.Background>
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          </Border>
+        </ControlTemplate>
+      </Button.Template>
+    </Button>
+  </Grid>
+</Border>
+        </Grid>
+    </Border>
+</Window>

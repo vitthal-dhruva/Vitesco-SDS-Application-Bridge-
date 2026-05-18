@@ -1,0 +1,390 @@
+﻿<Application x:Class="Hiemdall_bridge.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Hiemdall_bridge">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Red.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TabControl.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Your custom styles -->
+            <Style x:Key="RoundButton" TargetType="Button">
+                <Setter Property="Background" Value="#c2254d"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="Width" Value="120"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontWeight" Value="ExtraBold"/>
+                <Setter Property="FontFamily" Value="Calibri"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderThickness="1">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="SaveEditButtonStyle" TargetType="Button">
+                <!-- Base -->
+                <Setter Property="Background" Value="#1976D2"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="FontFamily" Value="Calibri"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Padding" Value="6,2"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+
+                <!-- Template -->
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="8"
+                              
+                        SnapsToDevicePixels="True"
+                        ClipToBounds="True">
+
+                                <ContentPresenter
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+                            </Border>
+
+                            <!-- States -->
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#1565C0"/>
+                                </Trigger>
+
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#0D47A1"/>
+                                </Trigger>
+
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="border" Property="Background" Value="#B0BEC5"/>
+                                    <Setter Property="Foreground" Value="#ECEFF1"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+     
+                <Style TargetType="Button" x:Key="GreenButton">
+                    <Setter Property="Background" Value="#00893d"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="25"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="FontFamily" Value="Calibri"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="12">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+                    <!-- Hover effect -->
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#1565C0"/>
+                        </Trigger>
+
+                        <!-- Pressed effect -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#0D47A1"/>
+                        </Trigger>
+
+                        <!-- Disabled -->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="#B0BEC5"/>
+                            <Setter Property="Foreground" Value="#ECEFF1"/>
+                        </Trigger>
+                    </Style.Triggers>
+
+                </Style>
+            
+                <Style TargetType="Button" x:Key="GrayButton">
+                    <Setter Property="Background" Value="#9E9E9E"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="20"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="FontFamily" Value="Calibri"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                                CornerRadius="10">
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+                    <!-- Hover -->
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#757575"/>
+                        </Trigger>
+
+                        <!-- Pressed -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#424242"/>
+                        </Trigger>
+
+                        <!-- Disabled -->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="#CFD8DC"/>
+                            <Setter Property="Foreground" Value="#ECEFF1"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+          
+
+
+            <!--Gropbox style-->
+                <Style TargetType="GroupBox">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="BorderBrush" Value="#DADADA"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="Margin" Value="8,4,8,8"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>
+            <!--Textbox style-->
+            <Style TargetType="TextBox"
+                BasedOn="{StaticResource MaterialDesignTextBox}">
+                <!-- Entered text color -->
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
+            <!--Textblock style-->
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="FontFamily" Value="Calibri"/>
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
+            <!--ComboBox style-->
+            <Style TargetType="ComboBoxItem">
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
+            <Style TargetType="Button">
+             <Setter Property="Foreground" Value="White"/>
+               
+            </Style>
+
+            
+            <!-- ==================== DataGrid Global Style ==================== -->
+            <Style TargetType="DataGrid">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="RowHeaderWidth" Value="0"/>
+                <Setter Property="Foreground" Value="#263238"/>              
+                <Setter Property="GridLinesVisibility" Value="None"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                <Setter Property="SelectionMode" Value="Single"/>
+                <Setter Property="CanUserAddRows" Value="False"/>
+                <Setter Property="CanUserDeleteRows" Value="False"/>
+                <Setter Property="CanUserResizeRows" Value="False"/>
+                <Setter Property="AutoGenerateColumns" Value="False"/>
+                <Setter Property="ColumnHeaderHeight" Value="40"/>
+                <Setter Property="RowHeight" Value="30"/>
+                <Setter Property="HorizontalGridLinesBrush" Value="#E0E0E0"/>
+                <Setter Property="VerticalGridLinesBrush" Value="#E0E0E0"/>
+                <Setter Property="SelectionUnit" Value="FullRow"/>
+                <Setter Property="Focusable" Value="False"/>
+            </Style>
+
+            <!-- Column Header Style -->
+            <Style TargetType="DataGridColumnHeader">
+               
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Background" Value="#ECEFF1"/>
+                <Setter Property="Foreground" Value="#263238"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Height" Value="40"/>
+            </Style>
+         
+            <!-- Cell Style -->
+            <Style TargetType="DataGridCell"
+                BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="TextBlock.TextDecorations" Value="{x:Null}"/>
+            </Style>
+
+            <!-- Row Style with Selection & Hover -->
+            <Style TargetType="DataGridRow">
+                <Setter Property="MinHeight" Value="35"/>
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Margin" Value="1"/>
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Style.Triggers>
+                    <!-- Selected Row -->
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="#90CAF9"/>
+                       <!-- Light Blue -->
+                        <Setter Property="Foreground" Value="#0D47A1"/>
+                    </Trigger>
+
+                    <!-- Hover Effect -->
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#BBDEFB"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!-- ==================== DataGrid Button Styles ==================== -->
+
+            <!-- Edit Button -->
+            <Style x:Key="DataGridEditButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="#00893d"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Width" Value="60"/>
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="Padding" Value="4,2"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="12" BorderThickness="0">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#1565C0"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="#0D47A1"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" Value="#B0BEC5"/>
+                        <Setter Property="Foreground" Value="#ECEFF1"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!-- Delete Button -->
+            <Style x:Key="DataGridDeleteButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="#E53935"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Width" Value="60"/>
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="Padding" Value="4,2"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="12" BorderThickness="0">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#D32F2F"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="#B71C1C"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" Value="#B0BEC5"/>
+                        <Setter Property="Foreground" Value="#ECEFF1"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <!-- Add this style -->
+            <Style x:Key="CenterAlignedCell" TargetType="TextBlock">
+                <Setter Property="TextDecorations" Value="{x:Null}"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="TextWrapping" Value="NoWrap"/>                
+                <Setter Property="Padding" Value="10,0,0,0"/>
+            </Style>
+            <!--Datagrid cell style-->
+            <Style x:Key="CenterButtonCell" TargetType="DataGridCell"
+                BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="BorderThickness" Value="0"/>
+            </Style>
+
+            <!-- Modern Button Style -->
+            <Style x:Key="ModernSearchButton" TargetType="Button">
+                <Setter Property="Background" Value="#2563EB"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="Padding" Value="20,8"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="6" 
+                                BorderThickness="0">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#1D4ED8"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!-- Label Style -->
+            <Style x:Key="InputLabel" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#64748B"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontWeight" Value="Medium"/>
+                <Setter Property="Margin" Value="0,0,0,4"/>
+            </Style>
+            <Style TargetType="{x:Type DatePickerTextBox}">
+  <Setter Property="Foreground" Value="Black"/>
+  <Setter Property="Background" Value="Transparent"/>
+  <Setter Property="Padding" Value="4,0"/>
+</Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

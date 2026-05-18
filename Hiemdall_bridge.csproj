@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <StartupObject></StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Style\**" />
+    <EmbeddedResource Remove="Style\**" />
+    <None Remove="Style\**" />
+    <Page Remove="Style\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Form1.xaml.cs" />
+    <Compile Remove="Interface\ITagConfigService.cs" />
+    <Compile Remove="Models\TagConfigGridModel.cs" />
+    <Compile Remove="Services\TagConfigService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Form1.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="S3.ico" />
+  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Extended.Wpf.Toolkit" Version="5.0.0" />
+		<PackageReference Include="MaterialDesignColors" Version="2.0.9" />
+		<PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+		<PackageReference Include="OPCFoundation.NetStandard.Opc.Ua" Version="1.5.376.244" />
+		<PackageReference Include="System.Data.SQLite.Core" Version="1.0.118" />
+		<PackageReference Include="System.Management" Version="10.0.2" />
+		
+	</ItemGroup>
+</Project>
