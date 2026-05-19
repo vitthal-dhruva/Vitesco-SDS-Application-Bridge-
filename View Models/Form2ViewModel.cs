@@ -180,8 +180,7 @@ public class Form2ViewModel : BaseViewModel
                 _messageBoxService.Show("Please enter valid IP Address and Port", MessageType.Error, MessageButtons.Ok);
                 return;
             }
-            await _tcp.ConnectAsync(ip, Convert.ToInt32(port));
-            //_ = ProcessTcpMessagesAsync();
+            await _tcp.ConnectAsync(ip, Convert.ToInt32(port));            
             StartTcpProcessor();
             StartSendTimer();
             StartDatabaseCleanup();
@@ -380,7 +379,7 @@ public class Form2ViewModel : BaseViewModel
                     LogToTab3("Status OPC write failed.", message);
                     _logger.Error("Status OPC write failed.  " + message);
                 }
-                _logger.Info($"message end: {message}  {DateTime.Now.ToString("yyyyMMdd HH:mm:ss ff")}");
+                //_logger.Info($"message end: {message}  {DateTime.Now.ToString("yyyyMMdd HH:mm:ss ff")}");
                 return;
             }
 
@@ -586,17 +585,17 @@ public class Form2ViewModel : BaseViewModel
                       tags.Add(new TagModel
                       {
                           Id = Convert.ToInt32(row["Id"]),
-                          CommandName = row["CommandName"].ToString()??"",
-                          CommandType = row["CommandType"].ToString()??"",
-                          ParamName = row["ParamName"].ToString()??"",
-                          DataType = row["DataType"].ToString()??"",
-                          NodeID = row["NodeID"].ToString()??"",
+                          CommandName = row["CommandName"].ToString() ?? "",
+                          CommandType = row["CommandType"].ToString() ?? "",
+                          ParamName = row["ParamName"].ToString() ?? "",
+                          DataType = row["DataType"].ToString() ?? "",
+                          NodeID = row["NodeID"].ToString() ?? "",
                           IsActive = Convert.ToBoolean(row["IsActive"])
                       });
                   }
                   if (!string.IsNullOrEmpty(rootElement) && tags.Count > 0)
                   {
-                      if(tags.Any(x => string.IsNullOrWhiteSpace(x.NodeID)))
+                      if (tags.Any(x => string.IsNullOrWhiteSpace(x.NodeID)))
                       {
                           _logger.Error($"One or more tags have null or empty NodeIDs. Command: {commandName}");
                           return;
@@ -677,7 +676,7 @@ public class Form2ViewModel : BaseViewModel
               }
           });
     }
-    
+
     private async void ConnectionChange(bool obj)
     {
         await App.Current.Dispatcher.BeginInvoke(() =>
@@ -782,7 +781,7 @@ public class Form2ViewModel : BaseViewModel
                 _messageBoxService.Show("Please enter valid Data", MessageType.Warning, MessageButtons.Ok);
                 return;
             }
-            if(Config.Port > 65535)
+            if (Config.Port > 65535)
             {
                 _messageBoxService.Show("Port should be less than 65535", MessageType.Warning, MessageButtons.Ok);
                 return;

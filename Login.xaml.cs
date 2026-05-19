@@ -18,7 +18,7 @@ namespace Hiemdall_bridge
         public Login()
         {
             InitializeComponent();
-            Loaded += Login_Loaded;
+            Loaded += Login_Loaded;            
         }
         private void Login_Loaded(object sender, RoutedEventArgs e)
         {
