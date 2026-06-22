@@ -20,10 +20,16 @@ namespace Hiemdall_bridge
         private static Mutex _mutex;
         protected override void OnStartup(StartupEventArgs e)
         {
-            bool createdNew;
-
-            // 1. Read instance ID FIRST (ONLY ONCE)
             string instanceId = "1";
+            try
+            {
+                instanceId = ConfigurationManager.AppSettings["IconNumber"];
+                // int iconNumber = int.TryParse(iconNoStr, out int no) ? no : 1;
+            }
+            catch (Exception)
+            {
+            }
+            bool createdNew;
 
             if (e.Args.Length > 0)
                 instanceId = e.Args[0];
@@ -124,7 +130,7 @@ namespace Hiemdall_bridge
                     }
                     else
                     {
-                        MessageBox.Show($"Icon file not found: {iconPath}", "Warning", MessageBoxButton.OK,MessageBoxImage.Warning);
+                        MessageBox.Show($"Icon file not found: {iconPath}", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
                 else
@@ -134,7 +140,7 @@ namespace Hiemdall_bridge
             }
             catch (Exception ex)
             {
-                MessageBox.Show("SetApplication Icon Error:" + ex.Message,"Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("SetApplication Icon Error:" + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

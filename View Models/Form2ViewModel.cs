@@ -595,13 +595,18 @@ public class Form2ViewModel : BaseViewModel
                   }
                   if (!string.IsNullOrEmpty(rootElement) && tags.Count > 0)
                   {
-                      if (tags.Any(x => string.IsNullOrWhiteSpace(x.NodeID)))
+                    
+                      List<string> requestNodeIds = tags.Where(x => x.CommandType == "Request" && x.CommandName != "Error").Select(x => x.NodeID).ToList();
+                      //if (tags.Any(x => string.IsNullOrWhiteSpace(x.NodeID)))
+                      //{
+                      //    _logger.Error($"One or more tags have null or empty NodeIDs. Command: {commandName}");
+                      //    return;
+                      //}
+                      if (requestNodeIds.Any(string.IsNullOrWhiteSpace))
                       {
-                          _logger.Error($"One or more tags have null or empty NodeIDs. Command: {commandName}");
+                          _logger.Error($"One or more Request NodeIDs are null or empty. Command: {commandName}");
                           return;
                       }
-                      List<string> requestNodeIds = tags.Where(x => x.CommandType == "Request" && x.CommandName != "Error").Select(x => x.NodeID).ToList();
-
                       if (requestNodeIds.Count > 0)
                       {
                           Dictionary<string, object> response = await _opc.ReadValuesCollection(requestNodeIds);

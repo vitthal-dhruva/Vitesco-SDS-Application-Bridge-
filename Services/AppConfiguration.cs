@@ -20,11 +20,11 @@ namespace Hiemdall_bridge.Services
                 Current.OPCUrl = ConfigurationManager.AppSettings["OPCConnection"] ?? "opc.tcp://127.0.0.1:4840";
 
                 // Parsing Integers
-                Current.CommandID = ConfigurationManager.AppSettings["EvetNode"];
+                Current.CommandID = ConfigurationManager.AppSettings["EventNode"];
                 Current.Status = ConfigurationManager.AppSettings["StatusNode"];
                 Current.PingNodeID = ConfigurationManager.AppSettings["PingNode"];
                 Current.PingDatatype = ConfigurationManager.AppSettings["PingDatatype"];
-                Current.Statusdatatype = ConfigurationManager.AppSettings["StatusNodeDatattype"];
+                Current.Statusdatatype = ConfigurationManager.AppSettings["StatusNodeDatatype"];
                 Current.pingtimer = ConfigurationManager.AppSettings["PingTimer"];
                 Current.pingtimedatatype = ConfigurationManager.AppSettings["PingTimerDatatype"];
 
